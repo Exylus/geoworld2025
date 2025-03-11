@@ -13,38 +13,40 @@
  */
 
 ?>
-<?php  require_once 'header.php'; ?>
+<?php require_once 'header.php'; ?>
 <?php
 require_once 'inc/manager-db.php';
-$continent = 'Asia';
+$continent = $_GET['continent'];
 $desPays = getCountriesByContinent($continent);
 ?>
 
 <main role="main" class="flex-shrink-0">
 
   <div class="container">
-    <h1>Les pays en Asie</h1>
+    <h1>Les pays en <?= $continent ?></h1>
     <div>
-     <table class="table">
-         <tr>
-           <th>Nom</th>
-           <th>Population</th>
-         </tr>
-       <?php
-       // $desPays est un tableau dont les éléments sont des objets représentant
-       // des caractéristiques d'un pays (en relation avec les colonnes de la table Country)
-          $pays = $desPays[0]; ?>
+      <table class="table">
+        <tr>
+          <th>Nom</th>
+          <th>Population</th>
+        </tr>
+        <?php
+        // $desPays est un tableau dont les éléments sont des objets représentant
+        // des caractéristiques d'un pays (en relation avec les colonnes de la table Country)
+        foreach ($desPays as $pays) {
+          ?>
           <tr>
             <td> <?php echo $pays->Name ?></td>
             <td> <?php echo $pays->Population ?></td>
           </tr>
-     </table>
+        <?php } ?>
+      </table>
     </div>
     <p>
-        <code>
+      <code>
       <?php
-        var_dump($desPays[0]);
-        ?>
+      var_dump($desPays[0]);
+      ?>
         </code>
     </p>
     <section class="jumbotron">
@@ -60,13 +62,16 @@ $desPays = getCountriesByContinent($continent);
           Pour générer le code HTML (table), vous devrez coder une boucle,
           par exemple de type <b><code>foreach</code></b> sur l'ensembles des objets de ce tableau. </p>
         <p>Référez-vous à la structure des tables SQL pour connaître le nom des <b><code>attributs</code></b>.
-          En effet, les objets du tableau ont pour attributs les noms des colonnes de la table interrogée par un requête SQL, via l'appel à la
+          En effet, les objets du tableau ont pour attributs les noms des colonnes de la table interrogée par un requête
+          SQL, via l'appel à la
           fonction <b><code>getCountriesByContinent</code></b> (du script <b><code>manager-db.php</code></b>.</p>
-        <p>Par exemple <b><code>Name</code></b> est une des colonnes de la table <b><code>Country</code></b> de la base de données.</p>
-          <p> Bonne programmation</p>
-          <div class="alert alert-warning" role="alert">
-            Cette section ne s'auto-détruit pas automatiquement, ce sera à vous de le faire, une fois compris son message !
-          </div>
+        <p>Par exemple <b><code>Name</code></b> est une des colonnes de la table <b><code>Country</code></b> de la base
+          de données.</p>
+        <p> Bonne programmation</p>
+        <div class="alert alert-warning" role="alert">
+          Cette section ne s'auto-détruit pas automatiquement, ce sera à vous de le faire, une fois compris son message
+          !
+        </div>
       </div>
     </section>
   </div>
