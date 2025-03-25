@@ -10,11 +10,9 @@
     <?php
     require_once('header.php');
     require_once('inc/manager-db.php');
-    require_once('inc/manager-wiki.php');
     if (isset($_GET['pays']) and !empty($_GET['pays'])) {
         $country = $_GET['pays'];
         $countryInformations = getCountryInformations($country);
-        $wikiInformations = getWikiInfos($country);
     } else {
         header('location: 404.php');
     }
@@ -37,13 +35,13 @@
         <div class="update-panel">
             <h2>Update Country Data</h2>
             <label for="countryName">Country name:</label>
-            <input type="text" value="<?= $country ?>" placeholder="Country Name">
-            <input type="text" value="<?= $wikiInformations['Capital'] ?>" placeholder="Capital">
-            <input type="number" value="<?= $wikiInformations['Population'] ?>" placeholder="Population">
-            <input type="text" value="<?= $wikiInformations['Area'] ?>" placeholder="Area">
-            <input type="text" value="<?= $wikiInformations['GDP'] ?>" placeholder="GDP">
-            <input type="text" value="<?= $wikiInformations['Life Expectancy'] ?>" placeholder="Life expectancy">
-            <input type="text" value="<?= $wikiInformations['Head of State'] ?>" placeholder="Head of state">
+            <input type="text" placeholder="Country Name">
+            <input type="text" placeholder="Capital">
+            <input type="number" placeholder="Population">
+            <input type="text" placeholder="Area">
+            <input type="text" placeholder="GDP">
+            <input type="text" placeholder="Life expectancy">
+            <input type="text" placeholder="Head of state">
             <div class="button-container">
                 <button class="fetch-btn">Fetch Data</button>
                 <button class="update-btn">Update</button>
