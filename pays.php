@@ -34,14 +34,7 @@
         </div>
         <div class="update-panel">
             <h2>Update Country Data</h2>
-            <input type="text" value="<?php if (isset($test)) {
-                echo $test;
-            } else {
-                echo "";
-            } ?>" placeholder="Country Name">
-            <input type="text" placeholder="Capital">
             <input type="number" placeholder="Population">
-            <input type="text" placeholder="Area">
             <input type="text" placeholder="GDP">
             <input type="text" placeholder="Life expectancy">
             <input type="text" placeholder="Head of state">

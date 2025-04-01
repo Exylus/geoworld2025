@@ -77,3 +77,73 @@ function getAllContinents()
     $query = 'SELECT DISTINCT Continent FROM Country;';
     return $pdo->query($query)->fetchAll();
 }
+
+// Add these new functions to manager-db.php
+
+/**
+ * Get paginated countries by continent
+ * 
+ * @param string $continent Continent name
+ * @param int $page Page number
+ * @param int $perPage Items per page
+ * @return array Array of countries
+ */
+function getPaginatedCountriesByContinent($continent, $page = 1, $perPage = 10)
+{
+    global $pdo;
+    $offset = ($page - 1) * $perPage;
+    $query = 'SELECT * FROM Country WHERE Continent = :cont LIMIT :offset, :perPage;';
+    $prep = $pdo->prepare($query);
+    $prep->bindValue(':cont', $continent, PDO::PARAM_STR);
+    $prep->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $prep->bindValue(':perPage', $perPage, PDO::PARAM_INT);
+    $prep->execute();
+    return $prep->fetchAll();
+}
+
+/**
+ * Get all countries with pagination
+ * 
+ * @param int $page Page number
+ * @param int $perPage Items per page
+ * @return array Array of countries
+ */
+function getAllPaginatedCountries($page = 1, $perPage = 10)
+{
+    global $pdo;
+    $offset = ($page - 1) * $perPage;
+    $query = 'SELECT * FROM Country LIMIT :offset, :perPage;';
+    $prep = $pdo->prepare($query);
+    $prep->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $prep->bindValue(':perPage', $perPage, PDO::PARAM_INT);
+    $prep->execute();
+    return $prep->fetchAll();
+}
+
+/**
+ * Count total countries
+ * 
+ * @return int Total count
+ */
+function countAllCountries()
+{
+    global $pdo;
+    $query = 'SELECT COUNT(*) as total FROM Country;';
+    return $pdo->query($query)->fetch()->total;
+}
+
+/**
+ * Count countries by continent
+ * 
+ * @param string $continent Continent name
+ * @return int Total count
+ */
+function countCountriesByContinent($continent)
+{
+    global $pdo;
+    $query = 'SELECT COUNT(*) as total FROM Country WHERE Continent = :cont;';
+    $prep = $pdo->prepare($query);
+    $prep->bindValue(':cont', $continent, PDO::PARAM_STR);
+    $prep->execute();
+    return $prep->fetch()->total;
+}
