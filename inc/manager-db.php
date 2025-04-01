@@ -75,5 +75,5 @@ function getAllContinents()
 {
     global $pdo;
     $query = 'SELECT DISTINCT Continent FROM Country;';
-    return $prep = $pdo->query($query)->fetchAll();
+    return $pdo->query($query)->fetchAll();
 }

@@ -34,18 +34,30 @@
         </div>
         <div class="update-panel">
             <h2>Update Country Data</h2>
-            <label for="countryName">Country name:</label>
-            <input type="text" placeholder="Country Name">
+            <input type="text" value="<?php if (isset($test)) {
+                echo $test;
+            } else {
+                echo "";
+            } ?>" placeholder="Country Name">
             <input type="text" placeholder="Capital">
             <input type="number" placeholder="Population">
             <input type="text" placeholder="Area">
             <input type="text" placeholder="GDP">
             <input type="text" placeholder="Life expectancy">
             <input type="text" placeholder="Head of state">
-            <div class="button-container">
-                <button class="fetch-btn">Fetch Data</button>
-                <button class="update-btn">Update</button>
-            </div>
+            <form method="post" class="button-container">
+                <input style="color: white;" type="submit" class="fetch-btn" value="Fetch Data" name="fetch-btn" />
+                <input style="color: white;" type="submit" class="update-btn" value="Update Data" name="update-btn" />
+            </form>
+            <?php
+            if (isset($_POST['fetch-btn'])) {
+                echo "This is Button1 that is selected";
+                $test = "test";
+            }
+            if (isset($_POST['update-btn'])) {
+                echo "This is Button2 that is selected";
+            }
+            ?>
         </div>
     </div>
     <?php require_once('footer.php') ?>

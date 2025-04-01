@@ -15,4 +15,14 @@
 ?>
 <script src="assets/library/jquery-3.4.1.js"> </script>
 <script src="assets/bootstrap-4.4.1-dist/js/bootstrap.js"> </script>
-
+<script src="https://cdn.jsdelivr.net/npm/maphilight@1.4.2/jquery.maphilight.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.map').maphilight({ fade: false });
+    });
+    $("#projmap area").click(function () {
+        var pays = $(this).attr('title');
+        var lien = "Pays.php?pays=" + pays;
+        $(this).attr("href", lien);
+    });
+</script>
